@@ -1,0 +1,122 @@
+footer{
+   position: fixed;
+   width: 100%;
+   bottom: 0;
+   float: right;
+   height: 8px;
+   background-color: black;
+   box-shadow: -2px 0 8px black;
+}
+body {
+   padding: 0;
+   margin: 0;
+   background-color: azure;
+   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#content {
+    margin: 0 auto;
+    padding: 3em 2em;
+    max-width: 800px;
+ }
+
+h1{
+    text-align: center;
+    font-size:  xx-large;
+    font-variant: small-caps;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+#contactInfo {
+   border-bottom: 5.35px solid grey;
+   padding: 15px;
+   margin: 0;
+   width: auto;
+   height: 18.6px;
+   text-align: center;
+   white-space: nowrap;
+   background-color: black;
+   font-variant: small-caps;
+   font-weight: 400;
+   box-shadow: 3px 3px 5px black;
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#contactInfo li{
+   color: #ededed;
+   display:inline-table;
+   text-align: center;
+   list-style: none;
+   margin: 0 0.25em 0 0.25em;
+}
+
+ h2 {
+   font-size: 1.4em;
+   margin: 0 0.25em 0 0.25em;
+   padding: 0;
+   font-weight: 600;
+   font-variant: small-caps;
+ }
+
+ a:link{ 
+   text-decoration: none;
+}
+
+a:visited{
+   color: orangered;
+}
+
+ h3 {
+    font-size: 1em;
+    margin-top: 0;
+ }
+
+ ol li {
+   margin-bottom: 1em;
+ }
+ ul{
+   padding: auto;
+   margin-top: 4px;
+ }
+
+ ul li {
+    margin-bottom: 2px;
+ }
+ p{
+   border-top: 4px;
+   border-bottom: 0;
+ }
+ ul li li {
+    margin-bottom: 0;
+ }
+
+.base{
+   height: 40px;
+   width: 260px;
+   float: right;
+   background-color: #6d55aa;
+   box-shadow: -7px 1px 8px black;
+   border: 1.3px solid black;
+}
+
+.button{
+   background-color: #6d55aa;
+   border: 1.4px solid black;
+   -webkit-text-stroke: black 1.2px;
+   color:antiquewhite;
+   padding: 4.302px 10px;
+   text-decoration: none;
+   float: left;
+   font-size: 12px;
+   text-shadow: 2px 2px 2px #333;
+}
+
+.button:hover{
+   background-color: #8773b9;
+   -webkit-text-stroke: #6d55aa 1px;
+   cursor: pointer;
+   box-shadow: 1px 1px 6px grey;
+}
