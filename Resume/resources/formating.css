@@ -101,18 +101,6 @@ p{
 
 #tab{    
     margin: 0 0 20px 30px;
-    display: inline-flexbox;
-}
-.child1{
-    width: fit-content;
-    height: 230px;
-    float: left;
-    margin-bottom: 20px;
-    margin-left: 20px;
-}
-.child2{
-    width: fit-content;
-    float: left;
 }
 
 .base{
