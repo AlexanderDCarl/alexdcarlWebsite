@@ -17,7 +17,7 @@ body {
 #content {
     margin: 0 auto;
     padding: 3em 2em;
-    max-width: 800px;
+    max-width: 600px;
  }
 
 h1{
@@ -92,6 +92,12 @@ a:visited{
  ul li li {
     margin-bottom: 0;
  }
+
+img{
+   float: right;
+   margin: 8px 15px 0 0;
+   box-shadow: 3px 3px 6px grey;
+} 
 
 .base{
    height: 40px;
