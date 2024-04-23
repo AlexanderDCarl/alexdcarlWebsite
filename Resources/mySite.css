@@ -42,6 +42,9 @@ h1{
    font-variant: small-caps;
    font-weight: 400;
    box-shadow: 3px 3px 5px black;
+   position:fixed;
+   width: 100%;
+   margin-top: -20px;
    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -56,6 +59,10 @@ h1{
    font-weight: 400;
    box-shadow: 3px 3px 5px black;
    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#tab{
+   padding-top: 70px;
+   margin-left: 20px;
 }
 #contactInfo li{
    color: #ededed;
@@ -72,12 +79,6 @@ h1{
    font-weight: 600;
    font-variant: small-caps;
  }
-
-
-
-a:visited{
-   color: orangered;
-}
 
  h3 {
     font-size: 1em;
@@ -105,7 +106,7 @@ a:visited{
 
 img{
    float: right;
-   margin: 8px 15px 0 0;
+   margin: 60px 15px 0 0;
    box-shadow: 3px 3px 6px grey;
 } 
 @media (max-width: 480px) {
@@ -114,6 +115,15 @@ img{
    }
    .button{
       width: 100%;
+   }
+   body{
+      padding-bottom: 120px;
+   }
+   #tab{
+      padding-top: 120px;
+   }
+   #content{
+      padding-top: 120px;
    }
 }
 .base{
@@ -134,6 +144,9 @@ img{
    float: left;
    font-size: 12px;
    text-shadow: 2px 2px 2px #333;
+   position:fixed;
+   margin-top: -20px;
+   z-index: 2;
 }
 
 .button:hover{
