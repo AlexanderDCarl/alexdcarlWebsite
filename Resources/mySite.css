@@ -2,8 +2,7 @@ footer{
    position: fixed;
    width: 100%;
    bottom: 0;
-   float: right;
-   height: 8px;
+   height: auto;
    background-color: black;
    box-shadow: -2px 0 8px black;
 }
@@ -12,6 +11,8 @@ body {
    margin: 0;
    background-color: aliceblue;
    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   overflow-x: hidden;
+   padding-bottom: 30px;
 }
 
 #content {
@@ -30,14 +31,13 @@ h1{
     
 }
 
-#contactInfo {
+#topBar {
    border-bottom: 5.35px solid grey;
    padding: 15px;
    margin: 0;
    width: auto;
    height: 25.6px;
    text-align: center;
-   white-space: nowrap;
    background-color: black;
    font-variant: small-caps;
    font-weight: 400;
@@ -45,6 +45,19 @@ h1{
    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+#contactInfo {
+   border-bottom: 5.35px solid grey;
+   padding: 15px;
+   margin: 0;
+   width: auto;
+   height: auto;
+   text-align: center;
+   background-color: black;
+   font-variant: small-caps;
+   font-weight: 400;
+   box-shadow: 3px 3px 5px black;
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 #contactInfo li{
    color: #ededed;
    display:inline-table;
@@ -98,7 +111,14 @@ img{
    margin: 8px 15px 0 0;
    box-shadow: 3px 3px 6px grey;
 } 
-
+@media (max-width: 480px) {
+   img{
+      display: none;
+   }
+   .button{
+      width: 100%;
+   }
+}
 .base{
    height: 40px;
    width: 260px;
