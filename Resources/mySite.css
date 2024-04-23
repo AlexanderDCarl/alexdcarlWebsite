@@ -73,9 +73,7 @@ h1{
    font-variant: small-caps;
  }
 
- a:link{ 
-   text-decoration: none;
-}
+
 
 a:visited{
    color: orangered;
