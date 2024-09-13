@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<html>
-
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./Resources/mySite.css" rel = "stylesheet">
-</head>
 
 <body>
-    <button class = "button" onclick = "location.href = '../index.html'" type = "button">
+
+<div id="topBar">
+    <ul>
+        <li><a href = "./index.html">Home</a></li>
+        <li><a href = "./Pages/About.html">About</a></li>
+        <li><a href = "./Pages/resume.html">Resume</a></li>
+
+    </ul>
+</div>
+
+<div class="bg"></div>
+<div class="parallax">
+    <div class="parallax-group">
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer fill"></div>
+    </div>
+    <div class="content">
+        <h1>Alexander Carl</h1>
+    </div>
+</div>
+<!-- <button class = "button" onclick = "location.href = './index.html'" type = "button">
         <h1>Alexander D. Carl</h1>
-    </button>
-    
-    <div id="topBar"></div>
+    </button> -->
+    <!--    background: linear-gradient(-125deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 77%, rgba(17,124,145,1) 110%);
+    background-repeat: no-repeat;
+-->
+<div id="contactInfo">
+    <li><a href = "mailto:alexdcarl@verizon.net" target="_blank">alexdcarl@verizon.net</a></li>
+    <li><a href = "https://www.linkedin.com/in/alexander-carl-27683a2a8/" target="_blank">LinkedIn</a></li>
+</div>
 
-    <p><p></p></p>
 
-    <img src = "./Resources/IMG_3863.jpg" alt = "Alexander D. Carl" style="width:200px;height:260px;" float: right;>
+    <!-- <img src = "./Resources/IMG_3863.jpg" alt = "Alexander D. Carl" style="width:200px;height:260px;">-->
 
-    <div id = "content">
-        
-        <h2>Info About Me</h2>
-        <ul>
-            Hi, I'm Alexander Carl, a Computer Science and Information Technology & Web Science dual major at Rensselaer Polytechnic Institute from Long Island, NY. I am an Eagle Scout as recognized by the Boy Scouts of America and an active community volunteer. I'm an academically rigorous person with motivation to learn and grow daily.         </ul>
 
-        <p></p>
-        <a href = "./Resume/resume.html"><h2>Resume</h2></a>
-        <ul>
-            I am actively seeking an internship opportunity for Summer 2024. My objective is to apply my academic knowledge and skills in a practical setting. Ideally, this internship would expound on my program languaging skills in C++, Python, R, SQL, HTML, etc.
-        </ul>    
-    </div>
 
+    <script src="./Resources/parallax.js"></script></head>
 </body>
-
-<footer>
-    <div id="contactInfo">
-        <li>14 Colonial Rd</li>
-        <li>Port Washington, NY  11050</li>
-        <li>516-350-7199</li>
-        <li><a href = "mailto:alexdcarl@verizon.net" target="_blank">alexdcarl@verizon.net</a></li>
-        <li><a href = "https://www.linkedin.com/in/alexander-carl-27683a2a8/" target="_blank">LinkedIn</a></li>
-    </div>
-</footer>
 </html>
