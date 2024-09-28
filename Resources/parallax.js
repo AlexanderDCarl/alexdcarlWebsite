@@ -1,75 +1,82 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const parallaxContainer = document.querySelector('.parallax');
-    const layers = document.querySelectorAll('.layer');
-    const topBar = document.getElementById('topBar');
-    const contactInfo = document.getElementById('contactInfo');
+    var parallaxContainer = document.querySelector('.parallax');
+    var layers = document.querySelectorAll('.layer');
+    var topBar = document.getElementById('topBar');
+    var contactInfo = document.getElementById('contactInfo');
+    var nameElement = document.getElementById('name');
 
-    function generateRandomMountainPath() {
-        const width = 1000;
-        const height = 200;
-        const peaks = 5;
-        const points = [];
-        for (let i = 0; i <= peaks; i++) {
-            const x = (i / peaks) * width;
-            const y = Math.random() * height;
-            points.push(`${x},${y}`);
+    function generateRandomMountainPath(viewWidth, viewHeight) {
+        var width = viewWidth;
+        var height = viewHeight;
+        var peaks = 5;
+        var points = [];
+        for (var i = 0; i <= peaks; i++) {
+            var x = (i / peaks) * width;
+            var y = Math.random() * height;
+            points.push("".concat(x, ",").concat(y));
         }
-        return `M0,${height / 2} C${points.join(' ')} L${width},${height} L0,${height} Z`;
+        return "M0,".concat(height / 2, " C").concat(points.join(' '), " L").concat(width, ",").concat(height, " L0,").concat(height, " Z");
     }
 
-    function createMountainSVG(color) {
-        const svgNS = "http://www.w3.org/2000/svg";
-        const svg = document.createElementNS(svgNS, "svg");
-        svg.setAttributeNS(null, "viewBox", "0 0 1000 200");
+    function createMountainSVG(color, viewWidth, viewHeight) {
+        var svgNS = "http://www.w3.org/2000/svg";
+        var svg = document.createElementNS(svgNS, "svg");
+        svg.setAttributeNS(null, "viewBox", "0 0 " + viewWidth + " 1000");
         svg.setAttributeNS(null, "preserveAspectRatio", "none");
-        const path = document.createElementNS(svgNS, "path");
-        path.setAttributeNS(null, "d", generateRandomMountainPath());
+        var path = document.createElementNS(svgNS, "path");
+        path.setAttributeNS(null, "d", generateRandomMountainPath(viewWidth, viewHeight/2));
         path.setAttributeNS(null, "fill", color);
         svg.appendChild(path);
         return svg;
     }
 
     function interpolateColor(color1, color2, factor) {
-        const result = color1.slice();
-        for (let i = 0; i < 3; i++) {
+        var result = color1.slice();
+        for (var i = 0; i < 3; i++) {
             result[i] = Math.round(result[i] + factor * (color2[i] - result[i]));
         }
-        return `rgb(${result[0]}, ${result[1]}, ${result[2]})`;
+        return "rgb(".concat(result[0], ", ").concat(result[1], ", ").concat(result[2], ")");
     }
 
     function hexToRgb(hex) {
-        const bigint = parseInt(hex.slice(1), 16);
-        const r = (bigint >> 16) & 255;
-        const g = (bigint >> 8) & 255;
-        const b = bigint & 255;
+        var bigint = parseInt(hex.slice(1), 16);
+        var r = (bigint >> 16) & 255;
+        var g = (bigint >> 8) & 255;
+        var b = bigint & 255;
         return [r, g, b];
     }
 
     function initializeLayers() {
-        const darkColor = hexToRgb("#000000");
-        const lightColor = hexToRgb("#c7d9ff");
-
-        layers.forEach((layer, index) => {
-            const factor = index / (layers.length - 1);
-            const color = interpolateColor(darkColor, lightColor, factor);
-            const svg = createMountainSVG(color);
+        var viewWidth = window.innerWidth; // Get the current width of the viewport
+        var viewHeight = window.innerHeight;
+        var darkColor = hexToRgb("#000000");
+        var lightColor = hexToRgb("#c7d9ff");
+        layers.forEach(function (layer, index) {
+            var factor = index / (layers.length - 1);
+            var color = interpolateColor(darkColor, lightColor, factor);
+            var svg = createMountainSVG(color, viewWidth, viewHeight);
+            layer.innerHTML = ''; // Clear previous content before appending
             layer.appendChild(svg);
+            layer.style.width = viewWidth + 'px';
+            layer.style.height = viewHeight/8 + 'px';
         });
     }
 
     function handleScroll() {
-        const scrollTop = parallaxContainer.scrollTop;
+        var scrollTop = parallaxContainer.scrollTop;
 
-        layers.forEach((layer, index) => {
-            const depth = (index) ** 1.3 * 0.1 - 1.3;
-            const movement = -(scrollTop * depth);
-            layer.style.transform = `translate3d(0, ${movement}px, 0)`;
+        var nameMovement = scrollTop * 1.4;
+        nameElement.style.transform = `translateY(${nameMovement}px)`;
+
+        layers.forEach(function (layer, index) {
+            var depth = Math.pow((index), 1.1) * 0.1 - 1.3;
+            var movement = -(scrollTop * depth);
+            layer.style.transform = "translate3d(0, ".concat(movement, "px, 0)");
         });
 
         // Show contactInfo when bottom of parallax container is reached
-        const scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
-        const documentHeight = parallaxContainer.scrollHeight;
-
+        var scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
+        var documentHeight = parallaxContainer.scrollHeight;
         if (scrollPosition >= documentHeight) {
             contactInfo.classList.add('show');
         } else {
@@ -77,8 +84,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Adjust the layer widths when the window is resized
+    window.addEventListener('resize', initializeLayers);
+
     initializeLayers();
     handleScroll();
-
     parallaxContainer.addEventListener('scroll', handleScroll);
 });
