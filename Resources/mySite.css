@@ -1,28 +1,25 @@
-
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-
+    scroll-behavior: auto;
 }
-
 #parallax {
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url(https://raw.githubusercontent.com/oscicen/oscicen.github.io/master/img/depth-3.png), url(https://raw.githubusercontent.com/oscicen/oscicen.github.io/master/img/depth-2.png), url(https://raw.githubusercontent.com/oscicen/oscicen.github.io/master/img/depth-1.png);
     background-repeat: no-repeat;
     background-position: center;
     background-position: 50% 50%;
 }
 
-body {
+#gradient {
     background: linear-gradient(-140deg, rgba(2, 0, 36, 1) 40%, rgba(9, 9, 121, 1) 50%, rgba(17, 124, 145, 1) 60%);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     overflow-x: hidden;
     padding-bottom: 30px;
-    height: 8em;
+    height: 100%;
 }
 
 #content {
@@ -66,13 +63,13 @@ h1 {
 
 #topBar {
     background-color: #ffffff;
-    box-shadow: 3px 3px 16px rgb(0, 0, 0);
+    box-shadow: 3px 3px 16px #000000;
     position: fixed;
     width: 80%;
     margin-left: 10%;
     border-radius: 20px;
-    top: 20px;
-    padding: 10px;
+    top: 2%;
+    padding: .2%;
     font-variant: small-caps;
     font-weight: 400;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -89,16 +86,15 @@ h1 {
 
 #topBar ul li {
     display: inline-block;
-    margin: 0;
-    margin-right: 30px;
+    margin: 0 clamp(6px, 5vh, 24px) 0 0;
 }
 
 #topBar ul li a {
     color: #333333;
     text-decoration: none;
-    padding: 15px 24px;
+    padding: clamp(4px, 3vw, 15px) clamp(4px, 2vw, 24px);
     display: inline-block;
-    font-size: 29px;
+    font-size: clamp(8px, 5vw, 24px);
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
@@ -110,11 +106,9 @@ h1 {
 }
 
 #contactInfo {
-    bottom: 20px;
-    position: fixed;
-    width: 80%;
+    bottom: 1px;
+    width: 98%;
     padding: 17px;
-    margin: 0 0 0 10%;
     height: auto;
     text-align: center;
     background-color: #000b29;
@@ -134,7 +128,7 @@ h1 {
 }
 
 #tab {
-    padding-top: 70px;
+    padding-top: 10vh;
     margin-left: 20px;
 }
 
@@ -206,7 +200,7 @@ img {
     float: right;
     background-color: #d33939;
     box-shadow: -7px 1px 8px black;
-    border: 1.3px solid black;
+    border: 1px solid black;
 }
 
 .button {
@@ -229,12 +223,13 @@ img {
     box-shadow: 1px 1px 6px grey;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
+.topColor {
+    color: #ffe4c7;
+    width: 100%;
+    top: 1px;
+    height: 25%;
+    z-index: -2;
+    position: absolute;
 }
 
 .bg {
@@ -242,35 +237,50 @@ html, body {
     height: 100%;
     width: 100%;
     top: 0;
-    z-index: 0;
-    background-color: #ffe4c7;
+    z-index: -2;
+    /*rgb(199, 217, 255)*/
+    overflow-x: hidden;
+    background-color: rgb(199, 217, 255);
+
+}
+
+#name {
+    color: #ffffff;
+    font-size: 4vh;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    position: absolute;
+    margin-top: 100px;
 }
 
 .layer {
     position: absolute;
-    top: 30vh;
-    margin: 0;
+    top: 15vh;
     padding: 0;
     width: 100%;
-    height: 10vh;
-    margin-top: -5vh;
+    height: 6vh;
+    margin: -5vh 0 0;
 }
-
 .layer svg {
     width: 100%;
     height: auto;
 }
 
 .parallax {
-    height: 150vh;
+    height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     perspective: 1px;
 }
 
 .parallax-group {
+    overflow-x: hidden;
     position: relative;
-    height: 150vh;
+    height: 130vh;
+    overflow-y: hidden;
     transform-style: preserve-3d;
 }
 
@@ -291,14 +301,9 @@ html, body {
     font-size: 15px;
     text-align: center;
     color: white;
-    margin-top: 500px;
+    margin-top: 50%;
     transform: translateZ(-2px) scale(3);
 }
-
-.fill {
-    height: 80%;
-}
-
 
 ::-webkit-scrollbar {
     border-radius: 20px;
