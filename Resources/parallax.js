@@ -67,32 +67,43 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     let isScrolling = false;
+    let lastScrollTop = 0;
+    let ticking = false;
 
-    function updateElements() {
+    function handleScroll() {
         const scrollTop = parallaxContainer.scrollTop;
 
-        nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
 
-        layers.forEach(function (layer, index) {
-            let depth = Math.pow(index, 1.1) * 0.1 - 1.3;
-            let movement = -(scrollTop * depth);
-            layer.style.transform = `translate3d(0, ${movement}px, 0)`;
-        });
+                layers.forEach(function (layer, index) {
+                    let depth = Math.pow(index, 1.1) * 0.1 - 1.3;
+                    let movement = -(scrollTop * depth);
+                    layer.style.transform = `translate3d(0, ${movement}px, 0)`;
+                });
 
-        let scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
-        let documentHeight = parallaxContainer.scrollHeight;
-        if (scrollPosition >= documentHeight) {
-            contactInfo.classList.add('show');
-        } else {
-            contactInfo.classList.remove('show');
+                // Show or hide contact info
+                let scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
+                let documentHeight = parallaxContainer.scrollHeight;
+                if (scrollPosition >= documentHeight) {
+                    contactInfo.classList.add('show');
+                } else {
+                    contactInfo.classList.remove('show');
+                }
+
+                lastScrollTop = scrollTop;
+                ticking = false;
+            });
+            ticking = true;
         }
-
-        window.requestAnimationFrame(updateElements);
     }
 
 
     window.addEventListener('resize', initializeLayers);
-
     initializeLayers();
-    updateElements();
+
+    handleScroll();
+    parallaxContainer.addEventListener('scroll', handleScroll);
+
 });
