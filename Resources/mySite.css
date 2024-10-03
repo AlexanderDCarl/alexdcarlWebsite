@@ -51,7 +51,6 @@ h1 {
     top: 0;
     width: 100%;
     display: block;
-    transition: top 0.3s;
     font-family: sans-serif;
     font-weight: bold;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -73,20 +72,15 @@ h1 {
     color: #fff;
 }
 
-#topBar ul li a:hover {
-    background-color: #637398;
-    color: #fff;
-    border-radius: 10px;
-}
-
 #contactInfo {
     bottom: 0;
-    position: absolute;
+    position: static;
     width: 98%;
-    padding: 17px;
+    padding: 17px 17px 39px;
     text-align: center;
     background-color: #000b29;
     box-shadow: 6px 6px 15px #031c37;
+    overflow-x: auto;
 }
 
 #contactInfo li {
@@ -94,10 +88,16 @@ h1 {
     display: inline-table;
     text-align: center;
     list-style: none;
+    margin: 4px 0.25em 0 0.25em;
+    text-decoration: none;
+}
+
+#contactInfo li a{
+    color: #b3bdf6;
     font-variant: small-caps;
     font-family: sans-serif;
-    font-weight: 400;
-    margin: 4px 0.25em 0 0.25em;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 #aboutContent {
@@ -257,7 +257,7 @@ img {
     bottom: 0;
     width: 100%;
     height: 1px;
-    position: absolute;
+    position: sticky;
     padding: 1px;
     background-color: transparent;
 }

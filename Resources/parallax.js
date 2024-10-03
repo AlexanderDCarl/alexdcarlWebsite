@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var factor = index / (layers.length - 1);
             var color = interpolateColor(darkColor, lightColor, factor);
             var svg = createMountainSVG(color, viewWidth, viewHeight);
-            layer.innerHTML = ''; // Clear previous content before appending
+            layer.innerHTML = '';
             layer.appendChild(svg);
             layer.style.width = viewWidth + 'px';
             layer.style.height = viewHeight/8 + 'px';
