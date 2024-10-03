@@ -5,6 +5,8 @@ html, body {
     padding: 0;
     overflow-x: hidden;
     scroll-behavior: auto;
+    display: flex;
+    flex-direction: column;
     background-color: rgb(199, 217, 255);
 }
 #parallax {
@@ -73,14 +75,15 @@ h1 {
 }
 
 #contactInfo {
+    position: fixed;
     bottom: 0;
-    position: static;
-    width: 98%;
+    width: 100%;
     padding: 17px 17px 39px;
     text-align: center;
     background-color: #000b29;
     box-shadow: 6px 6px 15px #031c37;
     overflow-x: auto;
+    z-index: 100;
 }
 
 #contactInfo li {
@@ -96,10 +99,15 @@ h1 {
     color: #b3bdf6;
     font-variant: small-caps;
     font-family: sans-serif;
+    text-align: center;
     font-weight: bold;
     text-decoration: none;
 }
-
+@media (max-width: 500px) {
+    #contactInfo {
+        padding: 15px;
+    }
+}
 #aboutContent {
     margin: 13vh auto 0;
     padding: 3em 2em;
