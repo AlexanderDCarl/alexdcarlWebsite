@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     var parallaxContainer = document.querySelector('.parallax');
     var layers = document.querySelectorAll('.layer');
-    var topBar = document.getElementById('topBar');
-    var contactInfo = document.getElementById('contactInfo');
+    var contactInfo = document.getElementById('bottomParallax');
     var nameElement = document.getElementById('name');
 
     function generateRandomMountainPath(viewWidth, viewHeight) {
@@ -12,7 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
         var points = [];
         for (var i = 0; i <= peaks; i++) {
             var x = (i / peaks) * width;
-            var y = Math.random() * height;
+            var numRand = Math.random();
+            if(numRand < .2)
+                numRand = .2;
+            else if(numRand > .8)
+                numRand = .8;
+            var y = numRand * height;
             points.push("".concat(x, ",").concat(y));
         }
         return "M0,".concat(height / 2, " C").concat(points.join(' '), " L").concat(width, ",").concat(height, " L0,").concat(height, " Z");
@@ -74,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
             layer.style.transform = "translate3d(0, ".concat(movement, "px, 0)");
         });
 
-        // Show contactInfo when bottom of parallax container is reached
         var scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
         var documentHeight = parallaxContainer.scrollHeight;
         if (scrollPosition >= documentHeight) {
@@ -84,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Adjust the layer widths when the window is resized
     window.addEventListener('resize', initializeLayers);
 
     initializeLayers();
