@@ -66,15 +66,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function handleScroll() {
+    let isScrolling = false;
+
+    function updateElements() {
         const scrollTop = parallaxContainer.scrollTop;
 
         nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
 
         layers.forEach(function (layer, index) {
-            let depth = Math.pow((index), 1.1) * 0.1 - 1.3;
+            let depth = Math.pow(index, 1.1) * 0.1 - 1.3;
             let movement = -(scrollTop * depth);
-            layer.style.transform = "translate3d(0, ".concat(movement, "px, 0)");
+            layer.style.transform = `translate3d(0, ${movement}px, 0)`;
         });
 
         let scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
@@ -84,11 +86,13 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             contactInfo.classList.remove('show');
         }
+
+        window.requestAnimationFrame(updateElements);
     }
+
 
     window.addEventListener('resize', initializeLayers);
 
     initializeLayers();
-    handleScroll();
-    parallaxContainer.addEventListener('scroll', handleScroll);
+    updateElements();
 });
