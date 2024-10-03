@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function initializeLayers() {
-        var viewWidth = window.innerWidth; // Get the current width of the viewport
+        var viewWidth = window.innerWidth;
         var viewHeight = window.innerHeight;
         var darkColor = hexToRgb("#000000");
         var lightColor = hexToRgb("#c7d9ff");
@@ -67,19 +67,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleScroll() {
-        var scrollTop = parallaxContainer.scrollTop;
+        const scrollTop = parallaxContainer.scrollTop;
 
-        var nameMovement = scrollTop * 1.4;
-        nameElement.style.transform = `translateY(${nameMovement}px)`;
+        nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
 
         layers.forEach(function (layer, index) {
-            var depth = Math.pow((index), 1.1) * 0.1 - 1.3;
-            var movement = -(scrollTop * depth);
+            let depth = Math.pow((index), 1.1) * 0.1 - 1.3;
+            let movement = -(scrollTop * depth);
             layer.style.transform = "translate3d(0, ".concat(movement, "px, 0)");
         });
 
-        var scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
-        var documentHeight = parallaxContainer.scrollHeight;
+        let scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
+        let documentHeight = parallaxContainer.scrollHeight;
         if (scrollPosition >= documentHeight) {
             contactInfo.classList.add('show');
         } else {
