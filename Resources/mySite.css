@@ -75,7 +75,6 @@ h1 {
 }
 
 #contactInfo {
-    position: fixed;
     bottom: 0;
     width: 100%;
     padding: 17px 17px 39px;
@@ -109,6 +108,7 @@ h1 {
     }
 }
 #aboutContent {
+    flex: 1;
     margin: 13vh auto 0;
     padding: 3em 2em;
     font-family: sans-serif;
@@ -117,6 +117,7 @@ h1 {
 }
 
 #tab {
+    flex: 1;
     padding-top: 10vh;
     margin-left: 32vw;
     max-width: 1200px;
