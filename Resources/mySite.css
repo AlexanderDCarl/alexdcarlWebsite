@@ -316,17 +316,16 @@ img {
     line-height: 40px;
     z-index: 10;
     width: 100%;
-    font-size: xx-large;
     text-align: center;
     color: white;
     margin-top: 25vw;
-    padding-bottom: 5vw;
+    padding-bottom: clamp(100px, 5vw, 500px);
     transform: translateZ(-2px) scale(3);
 }
 
 .homePageButton{
     margin-top: 20px;
-    font-size: x-large;
+    font-size: clamp(1rem, 1vw, 5rem);
     color: #3c3c3c;
     text-decoration: none;
     padding: 4px 4px 4px 6px;
@@ -337,7 +336,7 @@ img {
     background-color: #a6b5d5;
     cursor: pointer;
     text-decoration: none;
-    font-size: .9em;
+    font-size: clamp(1.4rem, 1.3vw, 6rem);
     transition: padding, font-size 300ms ease-in-out;
 }
 @media (max-width: 760px) {
