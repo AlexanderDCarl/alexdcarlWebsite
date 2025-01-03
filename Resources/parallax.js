@@ -1,9 +1,10 @@
+const parallaxContainer = document.querySelector('#parallax');
+const layers = document.querySelectorAll('.layer');
+const contactInfo = document.getElementById('bottomParallax');
+const nameElement = document.getElementById('name');
+let ticking = false;
+
 document.addEventListener('DOMContentLoaded', function () {
-    const parallaxContainer = document.querySelector('#parallax');
-    const layers = document.querySelectorAll('.layer');
-    const contactInfo = document.getElementById('bottomParallax');
-    const nameElement = document.getElementById('name');
-    let ticking = false;
 
     function generateRandomMountainPath(viewWidth, viewHeight) {
         const peaks = 5;
@@ -54,28 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function handleScroll() {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const scrollTop = parallaxContainer.scrollTop;
-
-                nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
-
-                layers.forEach((layer, index) => {
-                    const depth = Math.pow(index, 1.1) * 0.1 - 1.3;
-                    layer.style.transform = `translate3d(0, ${-scrollTop * depth}px, 0)`;
-                });
-
-                const scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
-                const documentHeight = parallaxContainer.scrollHeight;
-                contactInfo.classList.toggle('show', scrollPosition >= documentHeight);
-
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }
-
     function debounce(func, wait = 100) {
         let timeout;
         return function (...args) {
@@ -85,7 +64,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener('resize', debounce(initializeLayers));
-    parallaxContainer.addEventListener('scroll', handleScroll);
 
     initializeLayers();
 });
+
+async function animation() {
+    function handleScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+
+                const { scrollTop, scrollHeight, clientHeight } = parallaxContainer;
+
+                nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
+
+                layers.forEach((layer, index) => {
+                    const depth = Math.pow(index, 1.1) * 0.1 - 1.3;
+                    layer.style.transform = `translateY(${-scrollTop * depth}px)`;
+                });
+
+                const scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
+                const documentHeight = parallaxContainer.scrollHeight;
+                contactInfo.classList.toggle('show', scrollPosition >= documentHeight);
+
+                ticking = false;
+                prevPos = parallaxContainer.scrollTop;
+            });
+            ticking = true;
+        }
+    }
+
+    parallaxContainer.addEventListener('scroll', handleScroll);
+}
+
+animation();
