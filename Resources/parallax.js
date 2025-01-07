@@ -1,11 +1,14 @@
 const parallaxContainer = document.querySelector('#parallax');
 const layers = document.querySelectorAll('.layer');
-const contactInfo = document.getElementById('bottomParallax');
 const nameElement = document.getElementById('name');
 const arrow = document.querySelector('.arrow');
 let ticking = false;
 let prevScrollTop = 0;
 let scrollTop = 0;
+let cachedDepths = [];
+layers.forEach((layer, index) => {
+    cachedDepths[index] = Math.pow(index, 1.1) * 0.1 - 1.3;
+});
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -70,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initializeLayers();
 
-
     function scroll() {
         scrollTop = parallaxContainer.scrollTop;
         if(scrollTop > 10){
@@ -79,28 +81,19 @@ document.addEventListener('DOMContentLoaded', function () {
         if(scrollTop < 10){
             arrow.classList.remove('hide');
         }
-        if(scrollTop !== prevScrollTop) {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                        nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
+        if (!ticking && scrollTop !== prevScrollTop) {
+            window.requestAnimationFrame(() => {
+                nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
 
-                        layers.forEach((layer, index) => {
-                            const depth = Math.pow(index, 1.1) * 0.1 - 1.3;
-                            layer.style.transform = `translateY(${-scrollTop * depth}px)`;
-                        });
+                layers.forEach((layer, index) => {
+                    layer.style.transform = `translateY(${-scrollTop * cachedDepths[index]}px)`;
+                });
 
-                        const scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
-                        const documentHeight = parallaxContainer.scrollHeight;
-                        contactInfo.classList.toggle('show', scrollPosition >= documentHeight);
-
-                        ticking = false;
-                        prevPos = parallaxContainer.scrollTop;
-                    });
-                    ticking = true;
-                }
+                ticking = false;
+            });
+            ticking = true;
         }
         prevScrollTop = scrollTop;
-
         requestAnimationFrame(scroll);
     }
     scroll();
