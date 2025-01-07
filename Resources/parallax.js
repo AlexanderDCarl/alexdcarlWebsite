@@ -2,7 +2,10 @@ const parallaxContainer = document.querySelector('#parallax');
 const layers = document.querySelectorAll('.layer');
 const contactInfo = document.getElementById('bottomParallax');
 const nameElement = document.getElementById('name');
+const arrow = document.querySelector('.arrow');
 let ticking = false;
+let prevScrollTop = 0;
+let scrollTop = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -66,34 +69,40 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', debounce(initializeLayers));
 
     initializeLayers();
+
+
+    function scroll() {
+        scrollTop = parallaxContainer.scrollTop;
+        if(scrollTop > 10){
+            arrow.classList.add('hide');
+        }
+        if(scrollTop < 10){
+            arrow.classList.remove('hide');
+        }
+        if(scrollTop !== prevScrollTop) {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                        nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
+
+                        layers.forEach((layer, index) => {
+                            const depth = Math.pow(index, 1.1) * 0.1 - 1.3;
+                            layer.style.transform = `translateY(${-scrollTop * depth}px)`;
+                        });
+
+                        const scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
+                        const documentHeight = parallaxContainer.scrollHeight;
+                        contactInfo.classList.toggle('show', scrollPosition >= documentHeight);
+
+                        ticking = false;
+                        prevPos = parallaxContainer.scrollTop;
+                    });
+                    ticking = true;
+                }
+        }
+        prevScrollTop = scrollTop;
+
+        requestAnimationFrame(scroll);
+    }
+    scroll();
 });
 
-async function animation() {
-    function handleScroll() {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-
-                const { scrollTop, scrollHeight, clientHeight } = parallaxContainer;
-
-                nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
-
-                layers.forEach((layer, index) => {
-                    const depth = Math.pow(index, 1.1) * 0.1 - 1.3;
-                    layer.style.transform = `translateY(${-scrollTop * depth}px)`;
-                });
-
-                const scrollPosition = parallaxContainer.scrollTop + parallaxContainer.clientHeight;
-                const documentHeight = parallaxContainer.scrollHeight;
-                contactInfo.classList.toggle('show', scrollPosition >= documentHeight);
-
-                ticking = false;
-                prevPos = parallaxContainer.scrollTop;
-            });
-            ticking = true;
-        }
-    }
-
-    parallaxContainer.addEventListener('scroll', handleScroll);
-}
-
-animation();
