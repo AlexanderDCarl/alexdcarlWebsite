@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initializeLayers();
 
-    function scroll() {
+    var scroll = function ()  {
         var scrollTop = parallaxContainer.scrollTop;
 
         if (scrollTop > 10)
@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         } else {
             lastScrollTop = scrollTop;
-
             scroll();
             raf(loop);
         }
