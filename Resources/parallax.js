@@ -75,13 +75,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function scroll() {
         scrollTop = parallaxContainer.scrollTop;
-        if(scrollTop > 10){
+
+        if (scrollTop > 10) {
             arrow.classList.add('hide');
-        }
-        if(scrollTop < 10){
+        } else {
             arrow.classList.remove('hide');
         }
-        if (!ticking && scrollTop !== prevScrollTop) {
+
+        if (!ticking) {
             window.requestAnimationFrame(() => {
                 nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
 
@@ -91,11 +92,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 ticking = false;
             });
+
             ticking = true;
         }
-        prevScrollTop = scrollTop;
-        requestAnimationFrame(scroll);
     }
-    scroll();
+    parallaxContainer.addEventListener('scroll', scroll);
+
 });
 
