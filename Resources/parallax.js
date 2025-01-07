@@ -3,8 +3,6 @@ const layers = document.querySelectorAll('.layer');
 const nameElement = document.getElementById('name');
 const arrow = document.querySelector('.arrow');
 let ticking = false;
-let prevScrollTop = 0;
-let scrollTop = 0;
 let cachedDepths = [];
 layers.forEach((layer, index) => {
     cachedDepths[index] = Math.pow(index, 1.1) * 0.1 - 1.3;
@@ -74,29 +72,43 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeLayers();
 
     function scroll() {
-        scrollTop = parallaxContainer.scrollTop;
+        var scrollTop = parallaxContainer.scrollTop;
 
-        if (scrollTop > 10) {
+        if (scrollTop > 10)
             arrow.classList.add('hide');
-        } else {
+        else
             arrow.classList.remove('hide');
-        }
 
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
+        nameElement.style.transform = `translateY(${scrollTop * 1.4}px)`;
 
-                layers.forEach((layer, index) => {
-                    layer.style.transform = `translateY(${-scrollTop * cachedDepths[index]}px)`;
-                });
+        layers.forEach((layer, index) => {
+            layer.style.transform = `translateY(${-scrollTop * cachedDepths[index]}px)`;
+        });
+    }
 
-                ticking = false;
-            });
+    var raf = window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        window.oRequestAnimationFrame;
+    var lastScrollTop = parallaxContainer.scrollTop;
 
-            ticking = true;
+    if (raf) {
+        loop();
+    }
+
+    function loop() {
+        var scrollTop = parallaxContainer.scrollTop;
+        if (lastScrollTop === scrollTop) {
+            raf(loop);
+            return;
+        } else {
+            lastScrollTop = scrollTop;
+
+            scroll();
+            raf(loop);
         }
     }
-    parallaxContainer.addEventListener('scroll', scroll);
 
 });
 
