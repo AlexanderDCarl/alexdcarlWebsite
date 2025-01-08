@@ -13,13 +13,13 @@
             padding: 0;
         }
         #parallax {
-
             overflow-y: hidden;
             perspective: 1px;
         }
 
-        .parallax-group {
+        #parallax-group {
              overflow-x: hidden;
+             overflow-y: hidden;
              position: relative;
              height: 130vh;
              overflow-y: hidden;
@@ -38,7 +38,7 @@
             width: 100%;
             height: 6vh;
             margin: -5vh 0 0;
-
+            overflow-y: visible;
             animation-play-state: paused;
             animation-delay: calc(var(--scroll) * -1s);
 
@@ -51,53 +51,58 @@
             will-change: position;
         }
         #l1{
+            top: 12%;
             animation: scroll-l1 1s linear infinite;
             animation-play-state: paused;
             animation-delay: calc(var(--scroll) * -1s);
         }
         #l2{
+            top: 22%;
             animation: scroll-l2 1s linear infinite;
             animation-play-state: paused;
             animation-delay: calc(var(--scroll) * -1s);
         }
         #l3{
+            top: 32%;
             animation: scroll-l3 1s linear infinite;
             animation-play-state: paused;
             animation-delay: calc(var(--scroll) * -1s);
         }
         #l4{
+            top: 42%;
             animation: scroll-l4 1s linear infinite;
             animation-play-state: paused;
             animation-delay: calc(var(--scroll) * -1s);
         }
         #l5{
+            top: 52%;
             animation: scroll-l5 1s linear infinite;
             animation-play-state: paused;
             animation-delay: calc(var(--scroll) * -1s);
         }
         @keyframes scroll-l1 {
             to {
-                transform: translateY(5000px);
+                transform: translateY(150vh);
             }
         }
         @keyframes scroll-l2 {
             to {
-                transform: translateY(4000px);
+                transform: translateY(120vh);
             }
         }
         @keyframes scroll-l3 {
             to {
-                transform: translateY(3000px);
+                transform: translateY(90vh);
             }
         }
         @keyframes scroll-l4 {
             to {
-                transform: translateY(2000px);
+                transform: translateY(60vh);
             }
         }
         @keyframes scroll-l5 {
             to {
-                transform: translateY(1000px);
+                transform: translateY(30vh);
             }
         }
 
@@ -107,7 +112,7 @@
             letter-spacing: 10px;
             text-transform: uppercase;
             line-height: 40px;
-            z-index: 10;
+            z-index: 20;
             width: 100%;
             text-align: center;
             color: white;
@@ -115,14 +120,20 @@
             padding-bottom: clamp(100px, 5vw, 500px);
             transform: translateZ(-2px) scale(3);
         }
-
+        .filler{
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            z-index: 10;
+            margin-top: -30vh;
+        }
     </style>
 </head>
 <body>
 
 <div class="bg"></div>
 <div id="parallax">
-    <div class="parallax-group">
+    <div id="parallax-group">
 
         <div class="layer" id="l1"></div>
         <div class="layer" id="l2"></div>
@@ -139,73 +150,88 @@
 
 
 <script>
-    const layers = document.querySelectorAll('.layer');
+    document.addEventListener('DOMContentLoaded', function () {
 
-    function generateRandomMountainPath(viewWidth, viewHeight) {
-        const peaks = 5;
-        let points = [];
-        for (let i = 0; i <= peaks; i++) {
-            let x = (i / peaks) * viewWidth;
-            let y = Math.max(0.2, Math.min(Math.random(), 0.8)) * viewHeight;
-            points.push(`${x},${y}`);
+        const layers = document.querySelectorAll('.layer');
+
+        function generateRandomMountainPath(viewWidth, viewHeight) {
+            const peaks = 5;
+            let points = [];
+            for (let i = 0; i <= peaks; i++) {
+                let x = (i / peaks) * viewWidth;
+                let y = Math.max(0.2, Math.min(Math.random(), 0.8)) * viewHeight;
+                points.push(`${x},${y}`);
+            }
+            return `M0,${viewHeight / 2} C${points.join(' ')} L${viewWidth},${viewHeight} L0,${viewHeight} Z`;
         }
-        return `M0,${viewHeight / 2} C${points.join(' ')} L${viewWidth},${viewHeight} L0,${viewHeight} Z`;
-    }
 
-    function createMountainSVG(color, viewWidth, viewHeight) {
-        const svgNS = "http://www.w3.org/2000/svg";
-        const svg = document.createElementNS(svgNS, "svg");
-        svg.setAttribute("viewBox", `0 0 ${viewWidth} 1000`);
-        svg.setAttribute("preserveAspectRatio", "none");
-        const path = document.createElementNS(svgNS, "path");
-        path.setAttribute("d", generateRandomMountainPath(viewWidth, viewHeight / 2));
-        path.setAttribute("fill", color);
-        svg.appendChild(path);
-        return svg;
-    }
+        function createMountainSVG(color, viewWidth, viewHeight) {
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("viewBox", `0 0 ${viewWidth} 1000`);
+            svg.setAttribute("preserveAspectRatio", "none");
+            const path = document.createElementNS(svgNS, "path");
+            path.setAttribute("d", generateRandomMountainPath(viewWidth, viewHeight / 2));
+            path.setAttribute("fill", color);
+            svg.appendChild(path);
+            return svg;
+        }
 
-    function interpolateColor(color1, color2, factor) {
-        return `rgb(${color1.map((c, i) => Math.round(c + factor * (color2[i] - c))).join(', ')})`;
-    }
+        function interpolateColor(color1, color2, factor) {
+            return `rgb(${color1.map((c, i) => Math.round(c + factor * (color2[i] - c))).join(', ')})`;
+        }
 
-    function hexToRgb(hex) {
-        const bigint = parseInt(hex.slice(1), 16);
-        return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
-    }
+        function hexToRgb(hex) {
+            const bigint = parseInt(hex.slice(1), 16);
+            return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
+        }
 
-    function initializeLayers() {
-        const viewWidth = window.innerWidth;
-        const viewHeight = window.innerHeight;
-        const darkColor = hexToRgb("#000000");
-        const lightColor = hexToRgb("#c7d9ff");
+        function initializeLayers() {
+            const viewWidth = window.innerWidth;
+            const viewHeight = window.innerHeight;
+            const darkColor = hexToRgb("#000000");
+            const lightColor = hexToRgb("#c7d9ff");
 
-        layers.forEach((layer, index) => {
-            const factor = index / (layers.length - 1);
-            const color = interpolateColor(darkColor, lightColor, factor);
-            const svg = createMountainSVG(color, viewWidth, viewHeight);
-            layer.innerHTML = '';
-            layer.appendChild(svg);
-            layer.style.width = `${viewWidth}px`;
-            layer.style.height = `${viewHeight / 8}px`;
-        });
-    }
+            layers.forEach((layer, index) => {
+                const factor = index / (layers.length - 1);
+                const color = interpolateColor(darkColor, lightColor, factor);
+                const svg = createMountainSVG(color, viewWidth, viewHeight);
+                layer.innerHTML = '';
+                layer.appendChild(svg);
+                const newDiv = document.createElement('div');
+                newDiv.classList = 'filler';
+                newDiv.style.background = color;
+                layer.appendChild(newDiv);
 
-    function debounce(func, wait = 100) {
-        let timeout;
-        return function (...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
-    }
+                layer.style.width = `${viewWidth}px`;
+                layer.style.height = `${viewHeight / 8}px`;
+            });
+        }
 
-    window.addEventListener('resize', debounce(initializeLayers));
+        function debounce(func, wait = 100) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
 
-    initializeLayers();
+        window.addEventListener('resize', debounce(initializeLayers));
 
+        initializeLayers();
+    });
 
     window.addEventListener(
         "scroll",
         () => {
+            if(window.pageYOffset / (document.body.offsetHeight - window.innerHeight) == 1) {
+                const parallax = document.getElementsByClassName('.parallax-group')
+                parallax.style.display = 'none';
+            }
+            else {
+                const parallax = document.getElementById('parallax-group')
+                parallax.style.display = 'block';
+            }
             document.body.style.setProperty(
                 "--scroll",
                 window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
