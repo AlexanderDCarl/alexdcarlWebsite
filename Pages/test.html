@@ -11,10 +11,30 @@
             overflow-x: hidden;
             margin: 0;
             padding: 0;
+            background: rgb(199, 217, 255);
+        }
+        #name {
+            color: #070707;
+            font-size: 4vh;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 10px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bold;
+            position: fixed;
+            top: 12%;
+            animation: scroll-name 1s linear infinite;
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll) * -1s);
+        }
+        @keyframes scroll-name {
+            to {
+                transform: translateY(170vh);
+            }
         }
         #parallax {
             overflow-y: hidden;
-            perspective: 1px;
+            overflow-x: hidden;
         }
 
         #parallax-group {
@@ -22,8 +42,7 @@
              overflow-y: hidden;
              position: relative;
              height: 130vh;
-             overflow-y: hidden;
-             transform-style: preserve-3d;
+            transform-style: preserve-3d;
          }
 
         .parallax-group div {
@@ -112,28 +131,78 @@
             letter-spacing: 10px;
             text-transform: uppercase;
             line-height: 40px;
-            z-index: 20;
+            z-index: 50;
             width: 100%;
             text-align: center;
             color: white;
-            margin-top: 25vw;
+            margin-top: 35vw;
+            margin-bottom: 10vw;
             padding-bottom: clamp(100px, 5vw, 500px);
             transform: translateZ(-2px) scale(3);
         }
+        .homePageButton{
+            z-index: 51;
+            font-size: clamp(.8rem, 1vw, 5rem);
+            color: #3c3c3c;
+            text-decoration: none;
+            padding: 4px 4px 4px 6px;
+            border-radius: 2px;
+            transition: padding, font-size 300ms ease-in-out;
+        }
+        .homePageButton:hover {
+            background-color: #a6b5d5;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: clamp(1rem, 1.2vw, 6rem);
+            transition: padding, font-size 300ms ease-in-out;
+        }
+
         .filler{
             width: 100%;
-            height: 100vh;
+            height: 1000px;
             position: fixed;
             z-index: 10;
-            margin-top: -30vh;
+        }
+        .bg {
+            position: absolute;
+            height: 130vh;
+            width: 100%;
+            top: 0;
+
+            /*rgb(199, 217, 255)*/
+            overflow-x: hidden;
+            background-color: rgb(255, 246, 232);
+
+        }
+        @keyframes bouncing {
+            0% {bottom: 0;}
+            50% {bottom: 20px;}
+            100% {bottom: 0;}
+        }
+
+        .arrow {
+            animation: bouncing 1s infinite ease-in-out;
+            display: block;
+            height: 50px;
+            left: 50%;
+            margin-left: -25px;
+            position: fixed;
+            bottom: 1px;
+            width: 50px;
+            z-index: 20;
+            box-shadow: none;
+            opacity: 1;
+            transition: opacity 0.3s linear;
         }
     </style>
 </head>
 <body>
+<img class="arrow" src="https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-128.png" />
 
 <div class="bg"></div>
 <div id="parallax">
     <div id="parallax-group">
+        <div id="name">ALEXANDER CARL</div>
 
         <div class="layer" id="l1"></div>
         <div class="layer" id="l2"></div>
@@ -150,8 +219,6 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-
         const layers = document.querySelectorAll('.layer');
 
         function generateRandomMountainPath(viewWidth, viewHeight) {
@@ -174,6 +241,7 @@
             path.setAttribute("d", generateRandomMountainPath(viewWidth, viewHeight / 2));
             path.setAttribute("fill", color);
             svg.appendChild(path);
+
             return svg;
         }
 
@@ -198,14 +266,18 @@
                 const svg = createMountainSVG(color, viewWidth, viewHeight);
                 layer.innerHTML = '';
                 layer.appendChild(svg);
+
                 const newDiv = document.createElement('div');
+                console.log(svg.getBoundingClientRect().bottom, svg.children[0].getBoundingClientRect().bottom)
                 newDiv.classList = 'filler';
                 newDiv.style.background = color;
+                newDiv.style.marginTop = `-${svg.getBoundingClientRect().bottom - svg.children[0].getBoundingClientRect().bottom + 100}px`;
                 layer.appendChild(newDiv);
 
                 layer.style.width = `${viewWidth}px`;
                 layer.style.height = `${viewHeight / 8}px`;
             });
+            console.log("");
         }
 
         function debounce(func, wait = 100) {
@@ -219,7 +291,6 @@
         window.addEventListener('resize', debounce(initializeLayers));
 
         initializeLayers();
-    });
 
     window.addEventListener(
         "scroll",
