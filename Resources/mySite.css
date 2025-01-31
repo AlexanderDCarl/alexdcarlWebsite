@@ -291,7 +291,6 @@ img {
     position: relative;
     height: 130vh;
     overflow-y: hidden;
-    transform-style: preserve-3d;
 }
 
 .parallax-group div {

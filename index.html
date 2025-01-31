@@ -2,40 +2,333 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./Resources/mySite.css" rel="stylesheet">
     <title>Alexander Carl</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="description" content="Alex Carl is an undergraduate at Rensselaer Polytechnic Institute, working towards a bachelors in Computer Science and Information Technology & Web Science.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body, html {
+            overflow-x: hidden;
+            margin: 0;
+            background-color: rgb(255, 246, 232);
+            padding: 0;
+        }
+        #name {
+            color: #070707;
+            font-size: 4vh;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 10px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bold;
+            position: fixed;
+            top: 12%;
+            animation: scroll-name 1s linear 0s infinite;
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll) * -1s);
+        }
+        @keyframes scroll-name {
+            to {
+                transform: translateY(170vh);
+            }
+        }
+        #parallax {
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
+        #parallax-group {
+            overflow-x: hidden;
+            overflow-y: hidden;
+            position: relative;
+            height: 200vh;
+            clip-path: inset(0 0 0 0);
+        }
+
+        .parallax-group div {
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .layer{
+            position: fixed;
+            top: 15vh;
+            padding: 0;
+            width: 100%;
+            height: 6vh;
+            margin: -5vh 0 0;
+            overflow-y: visible;
+        }
+        .layer svg {
+            width: 100%;
+            height: auto;
+            will-change: position;
+        }
+        #l1{
+            top: 12%;
+            animation: scroll-l1 1s linear 0s infinite;
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll) * -1s);
+        }
+        #l2{
+            top: 22%;
+            animation: scroll-l2 1s linear 0s infinite;
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll) * -1s);
+        }
+        #l3{
+            top: 32%;
+            animation: scroll-l3 1s linear 0s infinite;
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll) * -1s);
+        }
+        #l4{
+            top: 42%;
+            animation: scroll-l4 1s linear 0s infinite;
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll) * -1s);
+        }
+        #l5{
+            top: 52%;
+            animation: scroll-l5 1s linear infinite;
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll) * -1s);
+        }
+        @keyframes scroll-l1 {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        @keyframes scroll-l2 {
+            to {
+                transform: translateY(90vh);
+            }
+        }
+        @keyframes scroll-l3 {
+            to {
+                transform: translateY(50vh);
+            }
+        }
+        @keyframes scroll-l4 {
+            to {
+                transform: translateY(40vh);
+            }
+        }
+        @keyframes scroll-l5 {
+            to {
+                transform: translateY(-20vh);
+            }
+        }
+
+        .content {
+            position: relative;
+            background-color: transparent;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            line-height: 40px;
+            z-index: 50;
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding-top: 15vh;
+            margin-bottom: 19vh;
+            padding-bottom: 15vh;
+            transform: translateZ(-2px) scale(3);
+            background: rgb(199, 217, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .homePageButton{
+            z-index: 51;
+            font-size: clamp(.8rem, 1vw, 5rem);
+            color: #3c3c3c;
+            text-decoration: none;
+            padding: 4px 4px 4px 6px;
+            border-radius: 2px;
+            transition: padding, font-size 300ms ease-in-out;
+        }
+        .homePageButton:hover {
+            background-color: #a6b5d5;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: clamp(1rem, 1.2vw, 6rem);
+            transition: padding, font-size 300ms ease-in-out;
+        }
+
+        .filler{
+            width: 100%;
+            height: 1000px;
+            position: fixed;
+            z-index: 10;
+        }
+        .bg {
+            position: absolute;
+            height: 130vh;
+            width: 100%;
+            top: 0;
+
+            /*rgb(199, 217, 255)*/
+            overflow-x: hidden;
+            background-color: rgb(255, 246, 232);
+
+        }
+        @keyframes bouncing {
+            0% {bottom: 0;}
+            50% {bottom: 20px;}
+            100% {bottom: 0;}
+        }
+
+        .arrow {
+            animation: bouncing 1s infinite ease-in-out;
+            display: block;
+            height: 50px;
+            left: 50%;
+            margin-left: -25px;
+            position: fixed;
+            bottom: 1px;
+            width: 50px;
+            z-index: 20;
+            box-shadow: none;
+            opacity: 1;
+            transition: opacity 0.3s linear;
+        }
+    </style>
 </head>
 <body>
-<div id="topBar">
-    <a href="./index.html">HOME</a>
-    <a href="./Pages/About.html">ABOUT</a>
-    <a href="./Pages/resume.html">RESUME</a>
-</div>
-
 <img class="arrow" src="https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_keyboard_arrow_down_48px-128.png" />
 
 <div class="bg"></div>
-<div id="parallax" style="overflow-x: hidden;">
-    <div class="parallax-group">
+<div id="parallax">
+    <div id="parallax-group" style="z-index: 1;">
         <div id="name">ALEXANDER CARL</div>
 
-        <div class="layer"></div>
-        <div class="layer"></div>
-        <div class="layer"></div>
-        <div class="layer"></div>
-        <div class="layer"></div>
+        <div class="layer" id="l1"></div>
+        <div class="layer" id="l2"></div>
+        <div class="layer" id="l3"></div>
+        <div class="layer" id="l4"></div>
+        <div class="layer" id="l5"></div>
     </div>
     <div class="content">
-        <h1><a class="homePageButton" href="./Pages/About.html">About</a></h1>
-        <h1><a class="homePageButton" href="./Pages/resume.html">Resume</a></h1>
+        <div id="test">
+            <h1><a class="homePageButton" href="./Pages/About.html">About</a></h1>
+            <h1><a class="homePageButton" href="./Pages/resume.html">Resume</a></h1>
+        </div>
     </div>
-
 </div>
-<div id="bottomParallax"></div>
 
-<script src="./Resources/parallax.js"></script>
+
+
+<script>
+    const layers = document.querySelectorAll('.layer');
+
+    function generateRandomMountainPath(viewWidth, viewHeight) {
+        const peaks = 5;
+        let points = [];
+        for (let i = 0; i <= peaks; i++) {
+            let x = (i / peaks) * viewWidth;
+            let y = Math.max(0.2, Math.min(Math.random(), 0.8)) * viewHeight;
+            points.push(`${x},${y}`);
+        }
+        return `M0,${viewHeight / 2} C${points.join(' ')} L${viewWidth},${viewHeight} L0,${viewHeight} Z`;
+    }
+
+    function createMountainSVG(color, viewWidth, viewHeight) {
+        const svgNS = "http://www.w3.org/2000/svg";
+        const svg = document.createElementNS(svgNS, "svg");
+        svg.setAttribute("viewBox", `0 0 ${viewWidth} 1000`);
+        svg.setAttribute("preserveAspectRatio", "none");
+        const path = document.createElementNS(svgNS, "path");
+        path.setAttribute("d", generateRandomMountainPath(viewWidth, viewHeight / 2));
+        path.setAttribute("fill", color);
+        svg.appendChild(path);
+
+        return svg;
+    }
+
+    function interpolateColor(color1, color2, factor) {
+        return `rgb(${color1.map((c, i) => Math.round(c + factor * (color2[i] - c))).join(', ')})`;
+    }
+
+    function hexToRgb(hex) {
+        const bigint = parseInt(hex.slice(1), 16);
+        return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
+    }
+
+    function initializeLayers() {
+        const viewWidth = window.innerWidth;
+        const viewHeight = window.innerHeight;
+        const darkColor = hexToRgb("#000000");
+        const lightColor = hexToRgb("#c7d9ff");
+
+        layers.forEach((layer, index) => {
+            const factor = index / (layers.length - 1);
+            const color = interpolateColor(darkColor, lightColor, factor);
+            const svg = createMountainSVG(color, viewWidth, viewHeight);
+            layer.innerHTML = '';
+            layer.appendChild(svg);
+
+            const newDiv = document.createElement('div');
+            console.log(svg.getBoundingClientRect().bottom, svg.children[0].getBoundingClientRect().bottom)
+            newDiv.classList = 'filler';
+            newDiv.style.background = color;
+            newDiv.style.marginTop = `-${svg.getBoundingClientRect().bottom - svg.children[0].getBoundingClientRect().bottom + 100}px`;
+            layer.appendChild(newDiv);
+
+            layer.style.width = `${viewWidth}px`;
+            layer.style.height = `${viewHeight / 8}px`;
+        });
+        console.log("");
+    }
+
+    function debounce(func, wait = 100) {
+        let timeout;
+        return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+
+    var prevWidth = window.width;
+    window.addEventListener('resize', debounce(function() {
+        var width = window.innerWidth;
+        if (width !== prevWidth) {
+            prevWidth = width;
+            initializeLayers();
+            console.log("asd")
+        }
+    }));
+
+    initializeLayers();
+
+    window.prevHeight = 0;
+    function scrolling() {
+        if(window.pageYOffset != window.prevHeight) {
+            window.prevHeight = window.pageYOffset;
+            updateDivs();
+        }
+        requestAnimationFrame(scrolling);
+    }
+
+    requestAnimationFrame(scrolling);
+
+    function updateDivs() {
+        if(window.pageYOffset / (document.body.offsetHeight - window.innerHeight) == 1) {
+            //const parallax = document.getElementsByClassName('.parallax-group')
+            //parallax.style.visibility = 'hidden';
+        }
+        else {
+            const parallax = document.getElementById('parallax-group')
+            parallax.style.visibility = 'visible';
+        }
+        document.body.style.setProperty(
+            "--scroll",
+            window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+        );
+    }
+
+</script>
 </body>
 </html>
