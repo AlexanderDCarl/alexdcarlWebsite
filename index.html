@@ -291,13 +291,12 @@
         };
     }
 
-    var prevWidth = window.width;
+    window.prevWidth = window.width;
     window.addEventListener('resize', debounce(function() {
-        var width = window.innerWidth;
-        if (width !== prevWidth) {
-            prevWidth = width;
+        let width = window.visualViewport.width;
+        if (width !== window.prevWidth) {
+            window.prevWidth = width;
             initializeLayers();
-            console.log("asd")
         }
     }));
 
