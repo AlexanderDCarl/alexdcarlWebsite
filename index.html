@@ -291,15 +291,6 @@
         };
     }
 
-    window.prevWidth = window.width;
-    window.addEventListener('resize', debounce(function() {
-        let width = window.visualViewport.width;
-        if (width !== window.prevWidth) {
-            window.prevWidth = width;
-            initializeLayers();
-        }
-    }));
-
     initializeLayers();
 
     window.prevHeight = 0;
